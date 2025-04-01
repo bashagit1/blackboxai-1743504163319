@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | VitalSigns HSH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .malaysia-blue { background-color: #003366; }
+        .malaysia-yellow { background-color: #FFD700; }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="malaysia-blue text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-heartbeat text-2xl malaysia-yellow"></i>
+                <span class="text-xl font-bold">VitalSigns HSH</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-yellow-200">Home</a>
+                <a href="vitals-entry.html" class="hover:text-yellow-200">Record Vitals</a>
+                <a href="dashboard.html" class="hover:text-yellow-200 font-medium">Dashboard</a>
+                <a href="patient-records.html" class="hover:text-yellow-200">Records</a>
+                <a href="reports.html" class="hover:text-yellow-200">Reports</a>
+            </div>
+            <button class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <i class="fas fa-chart-line malaysia-yellow mr-2"></i> Vital Signs Dashboard
+        </h1>
+
+        <!-- Patient Selector -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <label for="patientSelect" class="block text-sm font-medium text-gray-700 mb-1">Select Patient</label>
+                    <select id="patientSelect" class="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="">All Patients</option>
+                        <option value="PT001">PT001 - Ahmad bin Ali</option>
+                        <option value="PT002">PT002 - Siti binti Abu</option>
+                        <option value="PT003">PT003 - Rajesh a/l Kumar</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="timeRange" class="block text-sm font-medium text-gray-700 mb-1">Time Range</label>
+                    <select id="timeRange" class="w-full md:w-64 px-4 py-2 border border-gray-300 rounded-md">
+                        <option value="24h">Last 24 Hours</option>
+                        <option value="7d">Last 7 Days</option>
+                        <option value="30d">Last 30 Days</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <strong>Critical Alert</strong>
+                </div>
+                <p class="mt-2 text-sm">Patient PT001 has high blood pressure (150/95 mmHg) recorded today at 10:30 AM</p>
+            </div>
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <strong>Warning</strong>
+                </div>
+                <p class="mt-2 text-sm">Patient PT002 has elevated glucose level (180 mg/dL) recorded yesterday</p>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Blood Pressure Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Blood Pressure Trend</h2>
+                <div class="chart-container">
+                    <canvas id="bpChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Pulse Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Pulse Rate Trend</h2>
+                <div class="chart-container">
+                    <canvas id="pulseChart"></canvas>
+                </div>
+            </div>
+
+            <!-- SpO2 Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">SpO₂ Levels</h2>
+                <div class="chart-container">
+                    <canvas id="spo2Chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Temperature Chart -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">Temperature Trend</h2>
+                <div class="chart-container">
+                    <canvas id="tempChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-white rounded-lg shadow-md p-4 text-center">
+                <div class="text-2xl font-bold text-blue-600">12</div>
+                <div class="text-sm text-gray-600">Patients Today</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-4 text-center">
+                <div class="text-2xl font-bold text-green-600">3</div>
+                <div class="text-sm text-gray-600">Critical Alerts</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-4 text-center">
+                <div class="text-2xl font-bold text-yellow-600">8</div>
+                <div class="text-sm text-gray-600">Warnings</div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-4 text-center">
+                <div class="text-2xl font-bold text-gray-600">24</div>
+                <div class="text-sm text-gray-600">Total Records</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        // Initialize charts (will be moved to app.js later)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Blood Pressure Chart
+            const bpCtx = document.getElementById('bpChart').getContext('2d');
+            const bpChart = new Chart(bpCtx, {
+                type: 'line',
+                data: {
+                    labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'],
+                    datasets: [
+                        {
+                            label: 'Systolic',
+                            data: [120, 125, 130, 128, 122, 118],
+                            borderColor: '#003366',
+                            backgroundColor: 'rgba(0, 51, 102, 0.1)',
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Diastolic',
+                            data: [80, 82, 85, 83, 80, 78],
+                            borderColor: '#FFD700',
+                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 50,
+                            max: 200
+                        }
+                    }
+                }
+            });
+
+            // Pulse Chart
+            const pulseCtx = document.getElementById('pulseChart').getContext('2d');
+            const pulseChart = new Chart(pulseCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Pulse Rate (bpm)',
+                        data: [72, 75, 80, 78, 76, 82, 79],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 50,
+                            max: 120
+                        }
+                    }
+                }
+            });
+
+            // SpO2 Chart
+            const spo2Ctx = document.getElementById('spo2Chart').getContext('2d');
+            const spo2Chart = new Chart(spo2Ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['PT001', 'PT002', 'PT003', 'PT004', 'PT005'],
+                    datasets: [{
+                        label: 'SpO₂ (%)',
+                        data: [98, 95, 97, 96, 94],
+                        backgroundColor: '#9C27B0',
+                        borderColor: '#7B1FA2',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 90,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Temperature Chart
+            const tempCtx = document.getElementById('tempChart').getContext('2d');
+            const tempChart = new Chart(tempCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Temperature (°C)',
+                        data: [36.8, 37.0, 36.9, 37.2, 37.1, 36.7],
+                        borderColor: '#F44336',
+                        backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 36,
+                            max: 38
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
