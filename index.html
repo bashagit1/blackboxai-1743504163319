@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalSigns HSH - HOME SWEET HOME CARE CENTER Vital Signs Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .malaysia-blue { background-color: #003366; }
+        .malaysia-yellow { background-color: #FFD700; }
+        .hero-bg {
+            background-image: url('https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="malaysia-blue text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-heartbeat text-2xl malaysia-yellow"></i>
+                <span class="text-xl font-bold">VitalSigns HSH</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-yellow-200 font-medium">Home</a>
+                <a href="vitals-entry.html" class="hover:text-yellow-200">Record Vitals</a>
+                <a href="dashboard.html" class="hover:text-yellow-200">Dashboard</a>
+                <a href="patient-records.html" class="hover:text-yellow-200">Records</a>
+                <a href="reports.html" class="hover:text-yellow-200">Reports</a>
+            </div>
+            <button class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">HSH Vital Signs Management</h1>
+            <p class="text-xl mb-8">Advanced tracking for healthcare professionals</p>
+            <a href="vitals-entry.html" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg text-lg transition duration-300 inline-block">
+                <i class="fas fa-plus-circle mr-2"></i>Record New Vitals
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Key Features</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-heartbeat text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Comprehensive Tracking</h3>
+                    <p class="text-gray-600">Monitor all vital signs including BP, SpO₂, temperature, and glucose levels with Malaysian healthcare standards.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-chart-line text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Real-time Dashboard</h3>
+                    <p class="text-gray-600">Interactive charts and visualizations for immediate patient assessment.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-file-export text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Export Reports</h3>
+                    <p class="text-gray-600">Generate PDF and CSV reports for medical records and analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="malaysia-blue text-white py-8 px-4">
+        <div class="container mx-auto text-center">
+            <p>© 2024 VitalSigns HSH - HSH CARE CENTER Healthcare Application</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="#" class="hover:text-yellow-200"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-yellow-200"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-yellow-200"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
